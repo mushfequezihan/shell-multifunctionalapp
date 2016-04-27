@@ -1,0 +1,36 @@
+#!/bin/bash
+#==============================================
+#script name: deleting employee record
+#by: mushfeque.zihan@gmail.com
+#purpose: user can select and delete any record
+#command line: delete_emp
+#==============================================
+
+#assigned variable
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+
+#managing screen initialization
+tput cup 16 4; echo "Caution: Delete employee recored only"
+tput cup 17 4; echo "By PHONE number(xxx-xxx-xxxx):"
+tput cup 17 35; read number
+
+#quiting if not sure about deleting record
+if test $number = "q"
+then
+	clear 
+else
+	tput cup 19 4; echo "Are you sure? (y)es or (n)o:"
+	tput cup 19 33; read answer
+
+		#if logic for delete record on the app
+		if [ "$answer" = y ]
+		then
+			sed /$number/d $file > r
+        		cp r $file
+        		rm r
+		else
+        		continue
+		fi
+
+#end of statement
+fi

@@ -1,0 +1,32 @@
+#!/bin/bash
+#=======================================================
+#script name: searching employee on the record
+#by: mushfeque.zihan@gmail.com
+#purpose: searching employee by name or telephone number
+#command line: search_emp
+#=======================================================
+
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+
+clear
+
+tput cup 2 24; echo "================================"
+tput cup 3 25; echo "Search employee on the record:"
+tput cup 4 24; echo "================================"
+
+tput cup 5 10; echo "Enter by name or phone number: "
+tput cup 5 41; read search
+
+#quit if not searching
+if test "$search" = "q"
+then
+	clear; exit
+fi
+
+tput cup 7 0; echo "Results: "
+
+#searching for an employee 
+tput cup 8 0; grep $search $file | tr ':' ' '
+
+tput cup 23 0; echo "press Enter to continue..."
+tput cup 22 27; read continue

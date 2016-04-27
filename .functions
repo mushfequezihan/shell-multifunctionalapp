@@ -1,0 +1,19 @@
+#!/bin/bash
+#=============================================
+#script name: functions
+#by: mushfeque.zihan@gmail.com
+#purpose: functions for sorting by information
+#command line: .functions
+#=============================================
+
+sort_name(){
+sort -k 2 -t: /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+}
+
+sort_job(){
+sort -k 6 -t: /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+}
+
+sort_dept(){
+sort -k 5 -t: /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+}

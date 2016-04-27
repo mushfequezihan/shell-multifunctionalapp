@@ -1,0 +1,226 @@
+#!/bin/bash
+#================================================
+#script name: employee add script
+#by: mushfeque.zihan@gmail.com
+#purpose: add new employee and remove duplication 
+#command line: add_emp
+#================================================
+
+#cleaning temp files
+trap "rm ~/tmp/* 2> /dev/null; exit" 0 1 2 3
+
+#variables and file location
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+loop=y
+
+#logic structure
+while test "$loop" = "y" 
+do
+
+#clearing screen
+clear
+
+#text replacment on screen
+tput cup 1 29; echo "========================"
+tput cup 2 30; echo "Add New Employee Info."
+tput cup 3 29; echo "========================"
+
+tput cup 5 15; echo "Telephone(xxx-xxx-xxxx):"
+tput cup 6 15; echo "Last Name:"
+tput cup 7 15; echo "First Name:"
+tput cup 8 15; echo "Middle Initial:"
+tput cup 9 15; echo "Dept#(xxxx):"
+tput cup 10 15; echo "Job Title:"
+tput cup 11 15; echo "Date Hired(mm/dd/yyyy):"
+
+tput cup 13 15; echo "Add another? (y)es or (q)uit:"
+tput cup 14 15; echo "Press \"-\" to go back or \"q\" for quit anytime."
+
+
+#statement and condition for adding new employee
+#PHONE NUMBER
+tput cup 5 40; read phone
+
+if [ "$phone" = "q" ]
+then
+	clear; exit
+fi
+
+#CHECK to see if the phone number is already exits!
+while grep "$phone" $file > /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/temp
+do
+
+	tput cup 17 0; echo "This number has already been assigned to:"
+	tput cup 18 0; tr ':' ' ' < /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/temp
+	tput cup 22 0; echo "press Enter to continue..."
+        tput cup 22 27; read prompt
+
+	tput cup 5 40; echo " "
+	tput cup 5 40; read phone
+
+		if [ "$phone" = "q" ]
+		then
+        		clear; exit
+		fi
+done
+
+
+
+#LAST NAME
+tput cup 6 40; read lname
+
+if test "$lname" = "q"
+then
+	clear; exit
+fi
+
+while test "$lname" = "-"
+do
+	tput cup 5 40; echo " "
+	tput cup 5 40; read phone
+
+		if test "$phone" = "q"
+		then
+			clear; exit
+		fi
+
+	tput cup 6 40; read lname
+done
+
+
+#FIRST NAME
+tput cup 7 40; read fname
+
+if [ "$fname" = "q" ]
+then
+        clear; exit
+fi
+
+while test "$fname" = "-"
+do
+        tput cup 6 40; echo " "
+        tput cup 6 40; read lname
+
+		if test "$lname" = "q"
+                then
+                        clear; exit
+                fi
+
+        tput cup 7 40; read fname
+done
+
+
+#MIDDLE NAME
+tput cup 8 40; read mname
+
+if [ "$mname" = "q" ]
+then
+        clear; exit
+fi
+
+while test "$mname" = "-"
+do
+        tput cup 7 40; echo " "
+        tput cup 7 40; read fname
+
+		if test "$fname" = "q"
+                then
+                        clear; exit
+                fi
+
+        tput cup 8 40; read mname
+done
+
+
+#DEPARTMENT NUMBER
+tput cup 9 40; read dept
+
+if [ "$dept" = "q" ]
+then
+        clear; exit
+fi
+
+while test "$dept" = "-"
+do
+        tput cup 8 40; echo "                 "
+        tput cup 8 40; read mname
+
+		if test "$mname" = "q"
+                then
+                        clear; exit
+                fi
+
+        tput cup 9 40; read dept
+done
+
+
+
+#JOB TITLE
+tput cup 10 40; read job
+
+if [ "$job" = "q" ]
+then
+        clear; exit
+fi
+
+while test "$job" = "-"
+do
+        tput cup 9 40; echo "                         "
+        tput cup 9 40; read dept
+
+		if test "$dept" = "q"
+                then
+                        clear; exit
+                fi
+
+        tput cup 10 40; read job
+done
+
+
+
+#HIRED DATE
+tput cup 11 40; read hired
+
+if [ "$hired" = "q" ]
+then
+        clear; exit
+fi
+
+while test "$hired" = "-"
+do
+        tput cup 10 40; echo "                      " 
+        tput cup 10 40; read job
+
+		if test "$job" = "q"
+                then
+                        clear; exit
+                fi
+
+        tput cup 11 40; read hired
+done
+
+
+
+#CHECK to see if the DEPT # is not blank
+#AND writing information to the file
+if [ "$dept" > "     " ]
+then
+        echo "$phone:$lname:$fname:$mname:$dept:$job:$hired" >> $file
+else
+        tput cup 16 15; echo "ERROR: please must enter the Dept#."
+fi
+
+
+
+#ADD ANOTHER OR QUIT
+tput cup 13 48; read option
+
+if test "$option" = "q" 
+then
+	clear; exit
+fi
+
+
+#END OF do while
+done
+

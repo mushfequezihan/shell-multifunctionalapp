@@ -1,0 +1,31 @@
+#!/bin/bash
+#============================================================================
+#script name: printed employee list
+#by: mushfeque.zihan@gmail.com
+#purpose: using awk command to show sorted info with .functions file printed
+#command line: print_emp
+#============================================================================
+
+clear
+
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+
+tput cup 2 22; echo "========================================"
+tput cup 3 23; echo "Print view: Employees information list"
+tput cup 4 22; echo "========================================"
+tput cup 5 0;
+
+tput cup 7 0; echo "Last Name"
+tput cup 7 12; echo "First Name"
+tput cup 7 26; echo "M."
+tput cup 7 32; echo "Phone Num."
+tput cup 7 45; echo "Dept"
+tput cup 7 52; echo "Title"
+tput cup 7 61; echo "Date Hired"
+tput cup 8 0; echo "======================================================================="
+
+#awk command with option specified for print view
+awk -F: '{printf "%-12s %-12s %s\t%s %s %10.10s %s\n", $2, $3, $4, $1, $5, $6, $7}' $file 
+
+tput cup 23 1; echo "Review..."
+tput cup 22 10; read prompt 

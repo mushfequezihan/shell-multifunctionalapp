@@ -1,0 +1,41 @@
+#!/bin/bash
+#============================================
+#script name: view employee list
+#by: mushfeque.zihan@gmail.com
+#purpose: list of all employees on the record
+#command line: view_emp
+#============================================
+
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+
+clear
+
+tput cup 2 29; echo "============================"
+tput cup 3 30; echo "List of all employees view"
+tput cup 4 29; echo "============================";
+
+#displays info on the file
+more $file
+
+tput cup 23 0; echo "Would you like to edit the file?(y/n)"; 
+tput cup 22 35; read prompt
+
+
+#edit option structure 
+if test "$prompt" = "y"
+then
+	clear
+	tput cup 3 5; echo  "**CAUTION: Are you sure you want to edit the raw file?(y/n)**"
+        tput cup 4 5; read ans
+	
+		if test "$ans" = "y"
+ 		then
+			nano emp_info
+			clear
+			less $file		
+		else
+			clear; exit
+		fi
+fi
+
+

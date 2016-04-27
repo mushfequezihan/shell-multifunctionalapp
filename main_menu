@@ -1,0 +1,60 @@
+#!/bin/bash
+#==========================================
+#script name: main menu for employee app
+#by: mushfeque.zihan@gmail.com
+#purpose: a menu for the employee info list
+#command line: main_menu
+#==========================================
+
+#clean up temporary files 
+trap "rm ./r 2> /dev/null; exit" 0 1 3
+
+#assigned variables
+file=/Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
+loop=y
+
+#logic structures
+while test $loop = "y" 
+do
+
+#clear the screen
+clear
+
+#managing screen initialization and screen text replacement
+tput cup 2 26; echo "================================="
+tput cup 3 27; echo "Main Menu: Employee Information"
+tput cup 4 26; echo "================================="
+
+tput cup 6 25; echo "A - Add new employee"
+tput cup 7 25; echo "D - Delete employee record"
+tput cup 8 25; echo "P - Print employee information"
+tput cup 9 25; echo "S - Search for employee"
+tput cup 10 25; echo "V - View employees list"
+tput cup 11 25; echo "Q - Quit application now."
+
+#built in function called for date
+tput cup 22 50; echo "`date`"
+
+#choice selection and continue
+tput cup 13 20; echo "Enter your choice:"
+tput cup 13 40;
+read choice || continue
+
+#case logic to call the application
+case $choice in 
+	[Aa]) bash add_emp;;
+	[Dd]) sh delete_emp;;		
+	[Pp]) clear; ./print_emp;;
+	[Ss]) ./search_emp;;
+	[Vv]) ./view_emp;;
+	[Qq]) clear; exit;;
+
+	#default option for invalid choices
+	*) tput cup 15 17; echo "Invalid choice: Menu option (press enter to continue).";
+	   tput cup 13 40; read choice;;
+
+#end of case logic
+esac  
+
+#end of do while  
+done
