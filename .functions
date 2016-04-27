@@ -6,6 +6,8 @@
 #command line: .functions
 #=============================================
 
+
+
 sort_name(){
 sort -k 2 -t: /Users/mushfequezihan/Documents/Git/multipurpose_employee_app/emp_info
 }
